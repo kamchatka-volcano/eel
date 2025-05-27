@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.18)
 project(test_eel)
 
+if(EEL_TEST_RELEASE)
+    add_subdirectory(release)
+endif()
+
 SealLake_GoogleTest(
         SOURCES
             test_string.cpp

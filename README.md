@@ -7,8 +7,7 @@ and other general-purpose tasks.
 
 ### Contents
 
-* `contract.h` - Macros for contract programming, violations lead to `std::terminate()` (the implementation is copied
-  from [GSL](https://github.com/microsoft/GSL))
+* `contract.h` - Assertion functions for contract programming
 * `functional.h` - Metaprogramming and other helpers for functions and callable objects;
 * `interface.h` - `eel::interface`, a private base class that brings the properties for virtual interfaces recommended
   by Core Guidelines (non-copyable, non-movable, has virtual destructor); `eel::access_permission` - a restricted
@@ -31,13 +30,12 @@ and other general-purpose tasks.
 Download and link the library from your project's CMakeLists.txt:
 
 ```
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.18)
 
 include(FetchContent)
 
 FetchContent_Declare(eel
-    GIT_REPOSITORY "https://github.com/kamchatka-volcano/eel.git"
-    GIT_TAG "origin/master"
+    URL https://github.com/kamchatka-volcano/eel/releases/download/v0.1.0/eel-v0.1.0.zip    
 )
 
 #uncomment if you need to install eel with your target
@@ -47,6 +45,9 @@ FetchContent_MakeAvailable(eel)
 add_executable(${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} PRIVATE eel::eel)
 ```
+
+Prefer using the release ZIP archive with FetchContent, as it is fully self-contained and avoids spending additional time downloading the library dependencies during the CMake configuration step.
+
 
 To install the library system-wide, use the following commands:
 ```
