@@ -5,7 +5,7 @@ if(EEL_TEST_RELEASE)
     add_subdirectory(release)
 endif()
 
-SealLake_GoogleTest(
+SealLake_v030_GoogleTest(
         SOURCES
             test_string.cpp
             test_traits.cpp

@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.18)
-project(eel VERSION 0.1.0 DESCRIPTION "eel - everyday extension library")
+project(eel VERSION 0.2.0 DESCRIPTION "eel - everyday extension library")
 include(external/seal_lake)
 
-SealLake_Bundle(
+SealLake_v030_Bundle(
         NAME eel-utfcpp
         GIT_REPOSITORY https://github.com/nemtrif/utfcpp.git
-        GIT_TAG v3.2.3
+        GIT_TAG v4.0.6
         SKIP_LOAD
         DESTINATION include/eel/detail/external
         FILES source/utf8.h
@@ -15,8 +15,8 @@ SealLake_Bundle(
         UTF8_ EEL_UTF8_
 )
 
-SealLake_HeaderOnlyLibrary(
+SealLake_v030_HeaderOnlyLibrary(
         COMPILE_FEATURES cxx_std_17
 )
-SealLake_OptionalSubProjects(tests)
+SealLake_v030_OptionalSubProjects(tests)
 
