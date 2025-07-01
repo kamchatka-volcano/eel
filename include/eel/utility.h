@@ -52,6 +52,35 @@ constexpr decltype(auto) deref(T&& obj)
     return *obj;
 }
 
+// Copy of Miscrosoft GSL final_action
+template <class F>
+class final_action
+{
+public:
+    static_assert(!std::is_reference<F>::value && !std::is_const<F>::value &&
+                      !std::is_volatile<F>::value,
+                  "Final_action should store its callable by value");
+
+    explicit final_action(F f) noexcept : f_(std::move(f)) {}
+
+    final_action(final_action&& other) noexcept
+        : f_(std::move(other.f_)), invoke_(std::exchange(other.invoke_, false))
+    {}
+
+    final_action(const final_action&) = delete;
+    final_action& operator=(const final_action&) = delete;
+    final_action& operator=(final_action&&) = delete;
+
+    ~final_action() noexcept
+    {
+        if (invoke_) f_();
+    }
+
+private:
+    F f_;
+    bool invoke_{true};
+};
+
 } //namespace eel
 
 #endif //EEL_UTILITY_H
